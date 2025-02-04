@@ -51,11 +51,17 @@ def is_perfect_number(n):
 
 def get_properties(n):
     properties = []
-    if is_prime_number(n):
-        properties.append('prime')
-    if is_perfect_number(n):
-        properties.append('perfect')
+    num_str = str(n)
+    num_digits = len(num_str)
+    armstrong_sum = sum(int(digit) ** num_digits for digit in num_str)
+    if armstrong_sum == n:
+        properties.append("armstrong")
+    if n % 2 == 0:
+        properties.append("even")
+    else:
+        properties.append("odd")
     return properties
+
 
 def get_fun_fact(number):
     try:
