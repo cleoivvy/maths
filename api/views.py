@@ -36,9 +36,10 @@ class ClassifyNumberView(APIView):
             number=number,
             is_prime=is_prime,
             is_perfect=is_perfect,
-            properties=','.join(properties),
+            properties=properties,  
             digit_sum=digit_sum,
             fun_fact=fun_fact
+
         )
 
     def is_prime_number(self, n: int) -> bool:
@@ -77,8 +78,16 @@ class ClassifyNumberView(APIView):
         try:
             response = requests.get(f'http://numbersapi.com/{number}?json=true')
             response.raise_for_status()
-            return response.json()['text']
+            fact = response.json()['text']
+            if number < 0:
+                fact = fact.replace(str(abs(number)), str(number))
+            return fact
         except requests.RequestException as e:
             return f"Error fetching fun fact: {str(e)}"
+
+           
+
+
+        
 
 
