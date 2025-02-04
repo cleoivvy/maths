@@ -2,5 +2,5 @@ from django.urls import path
 from .views import ClassifyNumberView
 
 urlpatterns = [
-    path('classify/', ClassifyNumberView.as_view())
+    path('classify-number', ClassifyNumberView.as_view())
 ]
